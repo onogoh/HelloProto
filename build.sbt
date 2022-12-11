@@ -3,6 +3,7 @@ name := "HelloProto"
 version := "0.1"
 
 scalaVersion := "2.13.10"
+crossScalaVersions := Seq("2.12.17", "2.13.10")
 
 //idePackagePrefix := Some("com.YAEngineers.Protobuf")
 
@@ -134,7 +135,7 @@ libraryDependencies ++= Seq(
 lazy val global = project
   .in(file(".")).enablePlugins(ScalafmtPlugin) //.enablePlugins( JavaAppPackaging, GhpagesPlugin, MicrositesPlugin, MdocPlugin) //.disablePlugins(ScalafmtPlugin)
   .settings(scalaVersion := "2.13.10",PB.protocVersion := "3.17.3",
-    settings, assemblySettings,
+    settings, assemblySettings,scalacOptions += "-target:jvm-1.8",
     libraryDependencies ++= globalDependencies
   )
 addCompilerPlugin("org.typelevel" % "kind-projector" % "0.13.2" cross CrossVersion.full)
