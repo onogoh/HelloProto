@@ -4,7 +4,7 @@ version := "0.1"
 
 scalaVersion := "2.13.10"
 
-idePackagePrefix := Some("com.YAEngineers.Protobuf")
+//idePackagePrefix := Some("com.YAEngineers.Protobuf")
 
 useCoursier := false
 
@@ -25,8 +25,8 @@ lazy val settings = Seq(
   resolvers ++= Seq(
     "Local Ivy Repository" at "file:///" + Path.userHome.absolutePath + ".ivy2/local",
     "Local Maven Repository" at "file://" + Path.userHome.absolutePath + "/.m2/repository",
-    Resolver.sonatypeRepo("releases"),
-    Resolver.sonatypeRepo("snapshots")
+//    Resolver.sonatypeOssRepo("releases"),
+//    Resolver.sonatypeRepo("snapshots")
   )
 )
 lazy val assemblySettings = Seq(
