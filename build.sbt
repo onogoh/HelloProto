@@ -2,12 +2,14 @@ name := "HelloProto"
 
 version := "0.1"
 
-scalaVersion := "2.13.10"
+//sbtPlugin := false
+
+ThisBuild / scalaVersion := "2.13.10"
 crossScalaVersions := Seq("2.12.17", "2.13.10")
 
 //idePackagePrefix := Some("com.YAEngineers.Protobuf")
 
-useCoursier := false
+useCoursier := true
 
 lazy val Test = "test"
 
