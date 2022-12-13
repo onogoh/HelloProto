@@ -6,6 +6,7 @@ version := "0.1"
 
 ThisBuild / scalaVersion := "2.13.10"
 //crossScalaVersions := Seq("2.12.17", "2.13.10")
+SettingKey[Option[String]]("ide-package-prefix") := Option("com.YAEngineers.Protobuf")
 
 //idePackagePrefix := Some("com.YAEngineers.Protobuf")
 useCoursier := true
@@ -44,7 +45,7 @@ lazy val assemblySettings = Seq(
 
 
 Compile / PB.targets := Seq(
-  scalapb.gen() -> (Compile / sourceManaged).value / "scalapb"
+  scalapb.gen() -> (Compile /sourceDirectory).value / "scala"
 
 )
 
