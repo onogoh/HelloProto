@@ -45,7 +45,7 @@ lazy val assemblySettings = Seq(
 
 
 Compile / PB.targets := Seq(
-  scalapb.gen() -> (Compile /sourceDirectory).value / "proto"
+  scalapb.gen() -> (Compile /sourceDirectory).value / "scala",
 
 )
 
