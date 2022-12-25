@@ -1,5 +1,6 @@
 //name := "HelloProto"
-
+ThisBuild / organization := "com.YAEngineers"
+ThisBuild / version      := "0.1.0"
 version := "0.1"
 
 //sbtPlugin := false
@@ -33,11 +34,14 @@ lazy val settings = Seq(
   )
 )
 lazy val assemblySettings = Seq(
-    ThisBuild/assemblyJarName  := name.value + ".jar",
-  //  assemblyMergeStrategy in assembly := {
-  //    case PathList("META-INF", xs @ _*) => MergeStrategy.discard
-  //    case _                             => MergeStrategy.first
-  //  }
+    assembly/assemblyJarName  := name.value + ".jar",
+    assembly/assemblyMergeStrategy := {
+      case PathList("META-INF", "io.netty.versions.properties") => MergeStrategy.first
+      case x if x.endsWith("META-INF/io.netty.versions.properties") => MergeStrategy.first
+      case x =>
+        val oldStrategy = (assembly / assemblyMergeStrategy).value
+        oldStrategy(x)
+    }
 )
 
 
