@@ -56,18 +56,22 @@ Compile / PB.targets := Seq(
 
 // (optional) If you need scalapb/scalapb.proto or anything from
 // google/protobuf/*.proto
+val catseffectV = "3.3.12"
+val catseffect = "org.typelevel" %% "cats-effect" % catseffectV
+
 libraryDependencies ++= Seq(
   "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf",
   "com.google.protobuf" % "protobuf-java" % "3.17.3",
 // for gRPC
-  "io.grpc" % "grpc-netty" % scalapb.compiler.Version.grpcJavaVersion,
+  "io.grpc" % "grpc-netty-shaded" % scalapb.compiler.Version.grpcJavaVersion,catseffect,
 "com.thesamet.scalapb" %% "scalapb-runtime-grpc" % scalapb.compiler.Version.scalapbVersion,
 // for JSON conversion
 )
 
 
+
 lazy val global = project
-  .in(file(".")).enablePlugins(ScalafmtPlugin) //.enablePlugins( JavaAppPackaging, GhpagesPlugin, MicrositesPlugin, MdocPlugin) //.disablePlugins(ScalafmtPlugin)
+  .in(file(".")).enablePlugins(ScalafmtPlugin).enablePlugins(Fs2Grpc) //.enablePlugins( JavaAppPackaging, GhpagesPlugin, MicrositesPlugin, MdocPlugin) //.disablePlugins(ScalafmtPlugin)
   .settings(scalaVersion := "2.13.10",PB.protocVersion := "3.17.3",
     settings, assemblySettings,scalacOptions += "-target:jvm-1.8",
     libraryDependencies ++=Seq()
