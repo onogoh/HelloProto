@@ -45,26 +45,31 @@ lazy val assemblySettings = Seq(
 )
 
 
+//Compile /fs2.grpc.codegen
 
-
-
-Compile / PB.targets := Seq(
-//  scalapb.gen() -> (Compile /sourceDirectory).value / "scala",
-  scalapb.gen() -> (Compile /sourceManaged).value / "scalapb",
-
-)
-
+//PB.protocOptions in Compile := Seq("-xyz")
+//Compile / PB.targets := Seq(
+////  scalapb.gen() -> (Compile /sourceDirectory).value / "scala",
+//  scalapb.gen(grpc=false) -> (Compile /sourceManaged).value / "scalapb",
+//
+//
+//)
+//Compile/Fs2GrpcPlugin.trigger
 // (optional) If you need scalapb/scalapb.proto or anything from
 // google/protobuf/*.proto
 val catseffectV = "3.3.12"
 val catseffect = "org.typelevel" %% "cats-effect" % catseffectV
 
 libraryDependencies ++= Seq(
-  "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf",
+//  "com.thesamet.scalapb" %% "scalapb-runtime" % scalapb.compiler.Version.scalapbVersion % "protobuf",
   "com.google.protobuf" % "protobuf-java" % "3.17.3",
 // for gRPC
-  "io.grpc" % "grpc-netty-shaded" % scalapb.compiler.Version.grpcJavaVersion,catseffect,
-"com.thesamet.scalapb" %% "scalapb-runtime-grpc" % scalapb.compiler.Version.scalapbVersion,
+  "org.typelevel" %% "fs2-grpc-runtime" % "2.5.6",
+
+"io.grpc" % "grpc-netty-shaded" % scalapb.compiler.Version.grpcJavaVersion,catseffect,
+  "io.grpc" % "grpc-protobuf" % scalapb.compiler.Version.grpcJavaVersion,catseffect,
+  "io.grpc" % "grpc-stub" %scalapb.compiler.Version.grpcJavaVersion,catseffect,
+//  "com.thesamet.scalapb" %% "scalapb-runtime-grpc" % scalapb.compiler.Version.scalapbVersion,
 // for JSON conversion
 )
 
@@ -74,6 +79,8 @@ lazy val global = project
   .in(file(".")).enablePlugins(ScalafmtPlugin).enablePlugins(Fs2Grpc) //.enablePlugins( JavaAppPackaging, GhpagesPlugin, MicrositesPlugin, MdocPlugin) //.disablePlugins(ScalafmtPlugin)
   .settings(scalaVersion := "2.13.10",PB.protocVersion := "3.17.3",
     settings, assemblySettings,scalacOptions += "-target:jvm-1.8",
+//    fs2GrpcOutputPath := (Compile /sourceDirectory).value / "scalapb",
+    scalapbCodeGeneratorOptions += CodeGeneratorOption.FlatPackage,
     libraryDependencies ++=Seq()
   )
 addCompilerPlugin("org.typelevel" % "kind-projector" % "0.13.2" cross CrossVersion.full)
