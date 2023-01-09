@@ -1,5 +1,5 @@
 syntax = "proto3";
-package com.YAEngineers.Protobuf;
+package Protobuf;
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
