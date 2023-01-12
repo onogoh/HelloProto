@@ -7,7 +7,7 @@ version := "0.1"
 
 ThisBuild / scalaVersion := "2.13.10"
 //crossScalaVersions := Seq("2.12.17", "2.13.10")
-SettingKey[Option[String]]("ide-package-prefix") := Option("com.YAEngineers.Protobuf")
+SettingKey[Option[String]]("ide-package-prefix") := Option("com.YAEngineers")
 
 //idePackagePrefix := Some("com.YAEngineers.Protobuf")
 useCoursier := true
